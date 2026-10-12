@@ -6,27 +6,32 @@
   <title>CampusVoice - MU Network</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Added custom scrollbar styling for the comments section -->
   <style>
     .custom-scrollbar::-webkit-scrollbar { width: 6px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 10px; }
   </style>
 </head>
-<body class="bg-[#0f172a] text-slate-100 min-h-screen font-sans selection:bg-indigo-500/30">
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
 
   <!-- TOP NAVBAR -->
-  <header class="border-b border-slate-800 bg-[#0f172a]/90 backdrop-blur sticky top-0 z-40">
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('landing')">
-        <div class="bg-gradient-to-br from-indigo-500 to-purple-600 p-2 rounded-xl text-white font-bold text-sm shadow-lg shadow-indigo-500/20">MU</div>
-        <span class="font-bold text-xl tracking-tight hidden sm:block text-white">Mumbai University <span class="text-indigo-400">CampusVoice</span></span>
-        <span class="font-bold text-lg tracking-tight sm:hidden">MU <span class="text-indigo-400">Voice</span></span>
+      
+      <!-- Dynamic Navbar Branding -->
+      <div class="flex items-center space-x-2 cursor-pointer" onclick="switchView('landing')">
+        <div id="navLogoBadge" class="bg-indigo-600 p-2 rounded-lg text-white font-bold text-sm">MU</div>
+        <span id="navBrandText" class="font-bold text-lg tracking-tight hidden sm:block">Mumbai University <span class="text-indigo-400">CampusVoice</span></span>
+        <span id="navBrandTextMobile" class="font-bold text-lg tracking-tight sm:hidden">MU <span class="text-indigo-400">Voice</span></span>
       </div>
       
       <!-- Dynamic Navbar Actions -->
-      <div id="navActions" class="hidden">
-        <span id="navRoleBadge" class="text-xs font-medium px-3 py-1.5 rounded-full mr-4"></span>
+      <div id="navActions" class="hidden items-center gap-4">
+        <!-- Raise Issue Button (Only visible on Student Dashboard) -->
+        <button id="navRaiseIssueBtn" onclick="toggleModal(true)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-lg hidden">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>Raise Issue</span>
+        </button>
         <button onclick="logout()" class="text-sm text-slate-400 hover:text-white transition font-medium">Logout</button>
       </div>
     </div>
@@ -37,4 +42,43 @@
     <!-- ========================================== -->
     <!-- VIEW 1: LANDING PAGE                       -->
     <!-- ========================================== -->
-    <div id="view-landing" class="flex flex-col items-center justify-
+    <div id="view-landing" class="flex flex-col items-center justify-center min-h-[70vh]">
+      <h1 class="text-4xl font-bold text-center mb-4 text-white">Welcome to CampusVoice</h1>
+      <p class="text-slate-400 text-center mb-10 max-w-lg">The official anonymous issue resolution network for all colleges affiliated with Mumbai University.</p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+        <!-- Student Card -->
+        <div onclick="switchView('login-student')" class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center cursor-pointer hover:border-indigo-500 hover:bg-slate-800/80 transition group shadow-lg">
+          <div class="bg-indigo-900/50 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition">
+            <i data-lucide="graduation-cap" class="w-8 h-8 text-indigo-400 group-hover:text-white"></i>
+          </div>
+          <h2 class="text-xl font-bold mb-2">Student Login</h2>
+          <p class="text-sm text-slate-400">Login with your MU ID to anonymously upvote and raise campus issues.</p>
+        </div>
+
+        <!-- Institute Card -->
+        <div onclick="switchView('login-institute')" class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center cursor-pointer hover:border-emerald-500 hover:bg-slate-800/80 transition group shadow-lg">
+          <div class="bg-emerald-900/50 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition">
+            <i data-lucide="building" class="w-8 h-8 text-emerald-400 group-hover:text-white"></i>
+          </div>
+          <h2 class="text-xl font-bold mb-2">Institute Login</h2>
+          <p class="text-sm text-slate-400">Track and resolve issues for your college. Student identities remain hidden.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: STUDENT LOGIN                      -->
+    <!-- ========================================== -->
+    <div id="view-login-student" class="hidden max-w-md mx-auto mt-10">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-2xl">
+        <h2 class="text-2xl font-bold text-center mb-6 text-white">Student Verification</h2>
+        <form onsubmit="handleLogin(event, 'student')" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Select College</label>
+            <select class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500">
+              <option value="PRCET">Pravin Rohidas College of Engg & Tech</option>
+            </select>
+          </div>
+          <div>
+            <label class="
