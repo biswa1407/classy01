@@ -1,103 +1,168 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pravin Rohidas College - CampusVoice</title>
-  <!-- Tailwind CSS via CDN -->
+  <title>CampusVoice - MU Network</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
 
-  <!-- Top Navbar -->
+  <!-- TOP NAVBAR -->
   <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <div class="bg-indigo-600 p-2 rounded-lg text-white font-bold text-sm">PR</div>
-        <span class="font-bold text-lg tracking-tight hidden sm:block">Pravin Rohidas <span class="text-indigo-400">CampusVoice</span></span>
-        <span class="font-bold text-lg tracking-tight sm:hidden">PR<span class="text-indigo-400">Voice</span></span>
+      <div class="flex items-center space-x-2 cursor-pointer" onclick="switchView('landing')">
+        <div class="bg-indigo-600 p-2 rounded-lg text-white font-bold text-sm">MU</div>
+        <span class="font-bold text-lg tracking-tight hidden sm:block">Mumbai University <span class="text-indigo-400">CampusVoice</span></span>
+        <span class="font-bold text-lg tracking-tight sm:hidden">MU <span class="text-indigo-400">Voice</span></span>
       </div>
-      <button onclick="toggleModal(true)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-lg shadow-indigo-600/20">
-        <i data-lucide="plus" class="w-4 h-4"></i>
-        <span class="hidden sm:inline">Raise Issue</span>
-      </button>
+      
+      <!-- Dynamic Navbar Actions -->
+      <div id="navActions" class="hidden">
+        <span id="navRoleBadge" class="text-xs bg-slate-800 text-slate-400 px-2 py-1 rounded border border-slate-700 mr-3"></span>
+        <button onclick="logout()" class="text-sm text-slate-400 hover:text-white transition">Logout</button>
+      </div>
     </div>
   </header>
 
-  <!-- Main Layout Grid -->
-  <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-    
-    <!-- LEFT COLUMN: Main Feed (Takes up 2/3 of the screen) -->
-    <div class="lg:col-span-2 space-y-6">
+  <main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: LANDING PAGE (Select Role)         -->
+    <!-- ========================================== -->
+    <div id="view-landing" class="flex flex-col items-center justify-center min-h-[70vh]">
+      <h1 class="text-4xl font-bold text-center mb-4">Welcome to CampusVoice</h1>
+      <p class="text-slate-400 text-center mb-10 max-w-lg">The official anonymous issue resolution network for all colleges affiliated with Mumbai University.</p>
       
-      <!-- Intro Banner -->
-      <div class="p-6 rounded-2xl bg-gradient-to-r from-indigo-900/40 via-purple-900/20 to-slate-800/40 border border-slate-800">
-        <h1 class="text-2xl font-bold text-white mb-2">Pravin Rohidas College of Engineering and Technology Campus Pulse</h1>
-        <p class="text-slate-400 text-sm">Upvote and downvote practical improvements for our campus. Strictly moderated for constructive feedback — no names or defamatory remarks.</p>
-      </div>
-
-      <!-- Category Filters -->
-      <div class="flex flex-wrap gap-2 mb-2">
-        <button onclick="filterPosts('all')" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">All</button>
-        <button onclick="filterPosts('Infrastructure')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Infrastructure</button>
-        <button onclick="filterPosts('Canteen')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Canteen</button>
-        <button onclick="filterPosts('Academics')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Academics</button>
-      </div>
-
-      <!-- Feed Container -->
-      <div id="postsContainer" class="space-y-4">
-        <!-- Dynamic Posts Inject Here -->
-      </div>
-    </div>
-
-    <!-- RIGHT COLUMN: Sidebar (Takes up 1/3 of the screen) -->
-    <div class="space-y-6">
-      
-      <!-- College Profile Widget -->
-      <aside class="bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden sticky top-24">
-        <!-- REPLACE THE IMAGE URL BELOW TO ADD YOUR ACTUAL COLLEGE PHOTO -->
-        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" alt="College Campus" class="w-full h-40 object-cover" />
-        
-        <div class="p-5">
-          <h3 class="font-bold text-white text-lg mb-1 leading-tight">Pravin Rohidas College of Engineering and Technology</h3>
-          <p class="text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">Official CampusVoice</p>
-          
-          <div class="space-y-3 text-sm text-slate-300 border-t border-slate-700/50 pt-4">
-            <div class="flex items-center gap-3">
-              <i data-lucide="building" class="w-4 h-4 text-slate-500"></i> 
-              <span>Engineering & Technology</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <i data-lucide="book-open" class="w-4 h-4 text-slate-500"></i> 
-              <span>Affiliated with Mumbai University</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <i data-lucide="users" class="w-4 h-4 text-slate-500"></i> 
-              <span>Student Moderated Portal</span>
-            </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+        <!-- Student Card -->
+        <div onclick="switchView('login-student')" class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center cursor-pointer hover:border-indigo-500 hover:bg-slate-800/80 transition group">
+          <div class="bg-indigo-900/50 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition">
+            <i data-lucide="graduation-cap" class="w-8 h-8 text-indigo-400 group-hover:text-white"></i>
           </div>
+          <h2 class="text-xl font-bold mb-2">Student Login</h2>
+          <p class="text-sm text-slate-400">Login with your MU ID to anonymously upvote and raise campus issues.</p>
         </div>
-      </aside>
-      
+
+        <!-- Institute Card -->
+        <div onclick="switchView('login-institute')" class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center cursor-pointer hover:border-emerald-500 hover:bg-slate-800/80 transition group">
+          <div class="bg-emerald-900/50 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition">
+            <i data-lucide="building" class="w-8 h-8 text-emerald-400 group-hover:text-white"></i>
+          </div>
+          <h2 class="text-xl font-bold mb-2">Institute Login</h2>
+          <p class="text-sm text-slate-400">Track and resolve issues for your college. Student identities remain hidden.</p>
+        </div>
+      </div>
     </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: STUDENT LOGIN                      -->
+    <!-- ========================================== -->
+    <div id="view-login-student" class="hidden max-w-md mx-auto mt-10">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-2xl">
+        <h2 class="text-2xl font-bold text-center mb-6">Student Verification</h2>
+        <form onsubmit="handleLogin(event, 'student')" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Select College</label>
+            <select id="studentCollege" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+              <option value="PRCET">Pravin Rohidas College of Engineering (PRCET)</option>
+              <option value="OTHER">Other MU Affiliated College</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">MU University ID Number (PRN)</label>
+            <input type="text" required placeholder="e.g. 202301640..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white" />
+          </div>
+          <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 rounded-lg mt-4">Verify & Enter</button>
+          <button type="button" onclick="switchView('landing')" class="w-full text-slate-400 text-sm mt-2 hover:text-white">Back</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: INSTITUTE LOGIN                    -->
+    <!-- ========================================== -->
+    <div id="view-login-institute" class="hidden max-w-md mx-auto mt-10">
+      <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-2xl">
+        <h2 class="text-2xl font-bold text-center mb-6">Institute Portal</h2>
+        <form onsubmit="handleLogin(event, 'institute')" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Institute Code</label>
+            <input type="text" required value="PRCET-ADMIN" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Admin Password</label>
+            <input type="password" required value="hackathon" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white" />
+          </div>
+          <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded-lg mt-4">Access Dashboard</button>
+          <button type="button" onclick="switchView('landing')" class="w-full text-slate-400 text-sm mt-2 hover:text-white">Back</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: STUDENT DASHBOARD (Voting)         -->
+    <!-- ========================================== -->
+    <div id="view-dashboard-student" class="hidden">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Pravin Rohidas College - Pulse</h1>
+        <button onclick="toggleModal(true)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-lg">
+          <i data-lucide="plus" class="w-4 h-4"></i> Raise Issue
+        </button>
+      </div>
+      
+      <!-- Feed Container -->
+      <div id="studentPostsContainer" class="space-y-4 max-w-4xl">
+        <!-- JS will render voting cards here -->
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 5: INSTITUTE DASHBOARD                -->
+    <!-- ========================================== -->
+    <div id="view-dashboard-institute" class="hidden">
+      <div class="mb-6 p-6 rounded-2xl bg-emerald-900/20 border border-emerald-800/50 flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-bold text-white mb-1">Institute Admin Panel</h1>
+          <p class="text-slate-400 text-sm">Pravin Rohidas College of Engineering. Viewing anonymous student issues.</p>
+        </div>
+        <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center">
+          <span class="block text-2xl font-bold text-emerald-400" id="totalIssuesCount">0</span>
+          <span class="text-xs text-slate-400 uppercase">Active Issues</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden">
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="bg-slate-900/50 text-slate-400 uppercase text-xs border-b border-slate-700">
+            <tr>
+              <th class="px-6 py-4">Votes</th>
+              <th class="px-6 py-4">Issue Title</th>
+              <th class="px-6 py-4">Category</th>
+              <th class="px-6 py-4">Status Update</th>
+            </tr>
+          </thead>
+          <tbody id="instituteTableBody" class="divide-y divide-slate-700">
+            <!-- JS will render admin rows here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   </main>
 
-  <!-- Create Issue Modal -->
+  <!-- Create Issue Modal (Student Only) -->
   <div id="createModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden px-4">
     <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 w-full max-w-md shadow-2xl">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-bold text-white">Raise an Anonymous Issue</h3>
-        <button onclick="toggleModal(false)" class="text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
+        <button onclick="toggleModal(false)" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form id="issueForm" onsubmit="handleSubmit(event)" class="space-y-4">
         <div>
           <label class="block text-xs font-medium text-slate-400 mb-1">Category</label>
-          <select id="issueCategory" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+          <select id="issueCategory" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
             <option value="Infrastructure">Infrastructure</option>
             <option value="Canteen">Canteen & Food</option>
             <option value="Academics">Academics & Labs</option>
@@ -105,11 +170,7 @@
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-400 mb-1">Issue Title</label>
-          <input type="text" id="issueTitle" required placeholder="e.g., Wi-Fi disconnects frequently" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" />
-        </div>
-        <div>
-          <label class="block text-xs font-medium text-slate-400 mb-1">Details & Suggested Fix</label>
-          <textarea id="issueDesc" rows="3" required placeholder="Briefly describe what needs fixing..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500"></textarea>
+          <input type="text" id="issueTitle" required class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white" />
         </div>
         <div class="flex justify-end gap-2 pt-2">
           <button type="button" onclick="toggleModal(false)" class="px-4 py-2 text-sm rounded-lg text-slate-400 hover:text-white">Cancel</button>
@@ -119,121 +180,115 @@
     </div>
   </div>
 
-  <!-- Client-Side JavaScript Logic -->
   <script>
+    // 1. Data Store
     const defaultPosts = [
-      {
-        id: 1,
-        title: "Install UPI barcode scanners at the main canteen food counter",
-        desc: "During lunch break at 1 PM, network connectivity inside the canteen fails, causing huge lines at the manual card swipe machine.",
-        category: "Canteen",
-        votes: 142,
-        status: "Acknowledged by Council",
-        statusColor: "text-blue-400 bg-blue-900/30 border-blue-800"
-      },
-      {
-        id: 2,
-        title: "Extended Library hours during Mid-Sem exam week",
-        desc: "Requesting library reading halls to remain open until 8:00 PM instead of closing at 5:30 PM ahead of upcoming engineering mechanics unit tests.",
-        category: "Academics",
-        votes: 89,
-        status: "Under Review",
-        statusColor: "text-amber-400 bg-amber-900/30 border-amber-800"
-      },
-      {
-        id: 3,
-        title: "Computer Lab 4 keyboards need replacement",
-        desc: "Several spacebars and Enter keys in row 3 do not register strokes during practical exams.",
-        category: "Infrastructure",
-        votes: 64,
-        status: "Resolved",
-        statusColor: "text-emerald-400 bg-emerald-900/30 border-emerald-800"
-      }
+      { id: 1, title: "Install UPI scanners at main canteen", category: "Canteen", votes: 142, status: "Under Review" },
+      { id: 2, title: "Extended Library hours during exams", category: "Academics", votes: 89, status: "Under Review" },
+      { id: 3, title: "Computer Lab 4 keyboards need fixing", category: "Infrastructure", votes: 64, status: "Resolved" }
     ];
 
-    let posts = JSON.parse(localStorage.getItem('campus_posts_prcet')) || defaultPosts;
-    let userVotes = JSON.parse(localStorage.getItem('user_votes_prcet')) || {}; 
-    let currentCategory = 'all';
+    let posts = JSON.parse(localStorage.getItem('mu_posts')) || defaultPosts;
+    let userVotes = JSON.parse(localStorage.getItem('mu_user_votes')) || {}; 
+    let currentUserRole = null; // 'student' or 'institute'
 
     function saveState() {
-      localStorage.setItem('campus_posts_prcet', JSON.stringify(posts));
-      localStorage.setItem('user_votes_prcet', JSON.stringify(userVotes));
+      localStorage.setItem('mu_posts', JSON.stringify(posts));
+      localStorage.setItem('mu_user_votes', JSON.stringify(userVotes));
     }
 
-    function renderPosts() {
-      const container = document.getElementById('postsContainer');
+    // 2. View Management (SPA Logic)
+    function switchView(viewName) {
+      // Hide all views
+      ['landing', 'login-student', 'login-institute', 'dashboard-student', 'dashboard-institute'].forEach(v => {
+        document.getElementById('view-' + v).classList.add('hidden');
+      });
+      // Show selected view
+      document.getElementById('view-' + viewName).classList.remove('hidden');
+      
+      // Handle Navbar actions
+      const navActions = document.getElementById('navActions');
+      const roleBadge = document.getElementById('navRoleBadge');
+      
+      if (viewName.includes('dashboard')) {
+        navActions.classList.remove('hidden');
+        roleBadge.innerText = currentUserRole === 'institute' ? 'Institute Admin' : 'Verified Student';
+        roleBadge.className = currentUserRole === 'institute' 
+          ? 'text-xs bg-emerald-900/30 text-emerald-400 px-2 py-1 rounded border border-emerald-800 mr-3'
+          : 'text-xs bg-indigo-900/30 text-indigo-400 px-2 py-1 rounded border border-indigo-800 mr-3';
+      } else {
+        navActions.classList.add('hidden');
+      }
+      lucide.createIcons();
+    }
+
+    function handleLogin(e, role) {
+      e.preventDefault();
+      currentUserRole = role;
+      
+      if (role === 'student') {
+        renderStudentDashboard();
+        switchView('dashboard-student');
+      } else if (role === 'institute') {
+        renderInstituteDashboard();
+        switchView('dashboard-institute');
+      }
+    }
+
+    function logout() {
+      currentUserRole = null;
+      switchView('landing');
+    }
+
+    // 3. Student Dashboard Logic
+    function renderStudentDashboard() {
+      const container = document.getElementById('studentPostsContainer');
       container.innerHTML = '';
+      
+      let sortedPosts = [...posts].sort((a, b) => b.votes - a.votes);
 
-      const filtered = currentCategory === 'all' 
-        ? posts 
-        : posts.filter(p => p.category === currentCategory);
-
-      // Sort by highest votes
-      filtered.sort((a, b) => b.votes - a.votes);
-
-      filtered.forEach(post => {
-        const userVoteStatus = userVotes[post.id]; // 'up', 'down', or undefined
+      sortedPosts.forEach(post => {
+        const voteStatus = userVotes[post.id]; 
         
-        const card = document.createElement('div');
-        card.className = "bg-slate-800/80 border border-slate-700/60 rounded-xl p-4 sm:p-5 flex items-start gap-3 sm:gap-4 transition hover:border-slate-600";
-        card.innerHTML = `
-          <!-- Reddit-style Upvote/Downvote Column -->
-          <div class="flex flex-col items-center bg-slate-900/50 rounded-lg p-1">
-            <button onclick="handleVote(${post.id}, 'up')" class="p-1 rounded transition ${userVoteStatus === 'up' ? 'text-orange-500' : 'text-slate-500 hover:text-orange-400 hover:bg-slate-800'}">
-              <i data-lucide="arrow-big-up" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-            </button>
-            <span class="text-xs sm:text-sm font-bold py-0.5 ${userVoteStatus === 'up' ? 'text-orange-500' : userVoteStatus === 'down' ? 'text-indigo-400' : 'text-slate-300'}">${post.votes}</span>
-            <button onclick="handleVote(${post.id}, 'down')" class="p-1 rounded transition ${userVoteStatus === 'down' ? 'text-indigo-400' : 'text-slate-500 hover:text-indigo-400 hover:bg-slate-800'}">
-              <i data-lucide="arrow-big-down" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-            </button>
-          </div>
-
-          <!-- Content Column -->
-          <div class="flex-1 min-w-0 pt-1">
-            <div class="flex flex-wrap items-center gap-2 mb-2">
-              <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-700 text-slate-300 border border-slate-600">${post.category}</span>
-              <span class="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-full border ${post.statusColor}">${post.status}</span>
+        container.innerHTML += `
+          <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 flex items-start gap-4">
+            <div class="flex flex-col items-center bg-slate-900/50 rounded-lg p-1">
+              <button onclick="handleVote(${post.id}, 'up')" class="p-1 rounded ${voteStatus === 'up' ? 'text-orange-500' : 'text-slate-500'}">
+                <i data-lucide="arrow-big-up" class="w-6 h-6"></i>
+              </button>
+              <span class="text-sm font-bold py-0.5 ${voteStatus === 'up' ? 'text-orange-500' : voteStatus === 'down' ? 'text-indigo-400' : 'text-slate-300'}">${post.votes}</span>
+              <button onclick="handleVote(${post.id}, 'down')" class="p-1 rounded ${voteStatus === 'down' ? 'text-indigo-400' : 'text-slate-500'}">
+                <i data-lucide="arrow-big-down" class="w-6 h-6"></i>
+              </button>
             </div>
-            <h2 class="text-sm sm:text-base font-semibold text-white leading-snug mb-1.5">${post.title}</h2>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">${post.desc}</p>
+            <div class="flex-1 pt-1">
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-700 text-slate-300">${post.category}</span>
+              <span class="text-xs font-medium ml-2 text-slate-400">Status: ${post.status}</span>
+              <h2 class="text-base font-semibold text-white mt-2">${post.title}</h2>
+            </div>
           </div>
         `;
-        container.appendChild(card);
       });
       lucide.createIcons();
     }
 
     function handleVote(id, type) {
+      if (currentUserRole !== 'student') return; // Only students can vote
+      
       const post = posts.find(p => p.id === id);
-      if (!post) return;
-
       const currentVote = userVotes[id];
 
-      // Logic for changing votes
       if (currentVote === type) {
-        // If clicking the same button, remove the vote
         post.votes += (type === 'up' ? -1 : 1);
         delete userVotes[id];
       } else {
-        // If switching vote from up to down (or down to up), change by 2 points
         if (currentVote === 'up' && type === 'down') post.votes -= 2;
         else if (currentVote === 'down' && type === 'up') post.votes += 2;
-        // If voting for the first time, change by 1 point
         else post.votes += (type === 'up' ? 1 : -1);
-        
         userVotes[id] = type;
       }
       saveState();
-      renderPosts();
-    }
-
-    function filterPosts(cat) {
-      currentCategory = cat;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.className = "filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700";
-      });
-      event.target.className = "filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white";
-      renderPosts();
+      renderStudentDashboard();
     }
 
     function toggleModal(open) {
@@ -242,32 +297,62 @@
 
     function handleSubmit(e) {
       e.preventDefault();
-      const title = document.getElementById('issueTitle').value.trim();
-      const desc = document.getElementById('issueDesc').value.trim();
+      const title = document.getElementById('issueTitle').value;
       const category = document.getElementById('issueCategory').value;
 
-      if (!title || !desc) return;
-
-      const newPost = {
-        id: Date.now(),
-        title,
-        desc,
-        category,
-        votes: 1, // Automatically give 1 upvote from the creator
-        status: "Under Review",
-        statusColor: "text-amber-400 bg-amber-900/30 border-amber-800"
-      };
-
+      const newPost = { id: Date.now(), title, category, votes: 1, status: "Under Review" };
       posts.unshift(newPost);
       userVotes[newPost.id] = 'up';
       saveState();
-      renderPosts();
+      
+      renderStudentDashboard();
       document.getElementById('issueForm').reset();
       toggleModal(false);
     }
 
-    // Initialize
-    renderPosts();
+    // 4. Institute Dashboard Logic
+    function renderInstituteDashboard() {
+      const tbody = document.getElementById('instituteTableBody');
+      tbody.innerHTML = '';
+      document.getElementById('totalIssuesCount').innerText = posts.length;
+
+      let sortedPosts = [...posts].sort((a, b) => b.votes - a.votes);
+
+      sortedPosts.forEach(post => {
+        tbody.innerHTML += `
+          <tr class="hover:bg-slate-800/50 transition">
+            <td class="px-6 py-4 font-bold text-emerald-400">${post.votes}</td>
+            <td class="px-6 py-4">
+              <p class="font-medium text-white">${post.title}</p>
+              <p class="text-xs text-slate-500 mt-1">Reported by: ANONYMOUS STUDENT</p>
+            </td>
+            <td class="px-6 py-4"><span class="bg-slate-700 px-2 py-1 rounded text-xs">${post.category}</span></td>
+            <td class="px-6 py-4">
+              <select onchange="updateStatus(${post.id}, this.value)" class="bg-slate-900 border border-slate-600 rounded px-2 py-1 text-xs text-slate-300">
+                <option value="Under Review" ${post.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
+                <option value="Resolved" ${post.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+              </select>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function updateStatus(id, newStatus) {
+      const post = posts.find(p => p.id === id);
+      if (post) {
+        post.status = newStatus;
+        saveState();
+      }
+    }
+
+    // Initialize UI
+    switchView('landing');
+    lucide.createIcons();
   </script>
 </body>
 </html>
+
+  
+    
+     
