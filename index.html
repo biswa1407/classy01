@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CampusVoice — Anonymous Student Feedback</title>
+  <title>Pravin Rohidas College - CampusVoice</title>
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -12,39 +13,75 @@
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
 
   <!-- Top Navbar -->
-  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
-    <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <div class="bg-indigo-600 p-2 rounded-lg text-white font-bold">CV</div>
-        <span class="font-bold text-lg tracking-tight">Campus<span class="text-indigo-400">Voice</span></span>
-        <span class="text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded border border-slate-700 ml-2">Anonymous</span>
+        <div class="bg-indigo-600 p-2 rounded-lg text-white font-bold text-sm">PR</div>
+        <span class="font-bold text-lg tracking-tight hidden sm:block">Pravin Rohidas <span class="text-indigo-400">CampusVoice</span></span>
+        <span class="font-bold text-lg tracking-tight sm:hidden">PR<span class="text-indigo-400">Voice</span></span>
       </div>
       <button onclick="toggleModal(true)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-lg shadow-indigo-600/20">
         <i data-lucide="plus" class="w-4 h-4"></i>
-        <span>Raise Issue</span>
+        <span class="hidden sm:inline">Raise Issue</span>
       </button>
     </div>
   </header>
 
-  <!-- Main Feed Area -->
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <!-- Intro Banner -->
-    <div class="mb-8 p-6 rounded-2xl bg-gradient-to-r from-indigo-900/40 via-purple-900/20 to-slate-800/40 border border-slate-800">
-      <h1 class="text-2xl font-bold text-white mb-2">Anonymous Campus Pulse</h1>
-      <p class="text-slate-400 text-sm">Upvote practical improvements for our campus. Strictly moderated for constructive feedback — no names or defamatory remarks.</p>
+  <!-- Main Layout Grid -->
+  <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- LEFT COLUMN: Main Feed (Takes up 2/3 of the screen) -->
+    <div class="lg:col-span-2 space-y-6">
+      
+      <!-- Intro Banner -->
+      <div class="p-6 rounded-2xl bg-gradient-to-r from-indigo-900/40 via-purple-900/20 to-slate-800/40 border border-slate-800">
+        <h1 class="text-2xl font-bold text-white mb-2">Pravin Rohidas College of Engineering and Technology Campus Pulse</h1>
+        <p class="text-slate-400 text-sm">Upvote and downvote practical improvements for our campus. Strictly moderated for constructive feedback — no names or defamatory remarks.</p>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="flex flex-wrap gap-2 mb-2">
+        <button onclick="filterPosts('all')" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">All</button>
+        <button onclick="filterPosts('Infrastructure')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Infrastructure</button>
+        <button onclick="filterPosts('Canteen')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Canteen</button>
+        <button onclick="filterPosts('Academics')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Academics</button>
+      </div>
+
+      <!-- Feed Container -->
+      <div id="postsContainer" class="space-y-4">
+        <!-- Dynamic Posts Inject Here -->
+      </div>
     </div>
 
-    <!-- Category Filters -->
-    <div class="flex flex-wrap gap-2 mb-6">
-      <button onclick="filterPosts('all')" class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">All</button>
-      <button onclick="filterPosts('Infrastructure')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Infrastructure</button>
-      <button onclick="filterPosts('Canteen')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Canteen</button>
-      <button onclick="filterPosts('Academics')" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Academics</button>
-    </div>
-
-    <!-- Feed Container -->
-    <div id="postsContainer" class="space-y-4">
-      <!-- Dynamic Posts Inject Here -->
+    <!-- RIGHT COLUMN: Sidebar (Takes up 1/3 of the screen) -->
+    <div class="space-y-6">
+      
+      <!-- College Profile Widget -->
+      <aside class="bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden sticky top-24">
+        <!-- REPLACE THE IMAGE URL BELOW TO ADD YOUR ACTUAL COLLEGE PHOTO -->
+        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" alt="College Campus" class="w-full h-40 object-cover" />
+        
+        <div class="p-5">
+          <h3 class="font-bold text-white text-lg mb-1 leading-tight">Pravin Rohidas College of Engineering and Technology</h3>
+          <p class="text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">Official CampusVoice</p>
+          
+          <div class="space-y-3 text-sm text-slate-300 border-t border-slate-700/50 pt-4">
+            <div class="flex items-center gap-3">
+              <i data-lucide="building" class="w-4 h-4 text-slate-500"></i> 
+              <span>Engineering & Technology</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i data-lucide="book-open" class="w-4 h-4 text-slate-500"></i> 
+              <span>Affiliated with Mumbai University</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i data-lucide="users" class="w-4 h-4 text-slate-500"></i> 
+              <span>Student Moderated Portal</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+      
     </div>
   </main>
 
@@ -53,7 +90,9 @@
     <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 w-full max-w-md shadow-2xl">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-bold text-white">Raise an Anonymous Issue</h3>
-        <button onclick="toggleModal(false)" class="text-slate-400 hover:text-white">✕</button>
+        <button onclick="toggleModal(false)" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
       </div>
       <form id="issueForm" onsubmit="handleSubmit(event)" class="space-y-4">
         <div>
@@ -66,7 +105,7 @@
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-400 mb-1">Issue Title</label>
-          <input type="text" id="issueTitle" required placeholder="e.g., Library 3rd Floor Wi-Fi disconnects frequently" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" />
+          <input type="text" id="issueTitle" required placeholder="e.g., Wi-Fi disconnects frequently" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" />
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-400 mb-1">Details & Suggested Fix</label>
@@ -95,7 +134,7 @@
       {
         id: 2,
         title: "Extended Library hours during Mid-Sem exam week",
-        desc: "Requesting library reading halls to remain open until 8:00 PM instead of closing at 5:30 PM ahead of upcoming unit tests.",
+        desc: "Requesting library reading halls to remain open until 8:00 PM instead of closing at 5:30 PM ahead of upcoming engineering mechanics unit tests.",
         category: "Academics",
         votes: 89,
         status: "Under Review",
@@ -112,13 +151,13 @@
       }
     ];
 
-    let posts = JSON.parse(localStorage.getItem('campus_posts')) || defaultPosts;
-    let userVotes = JSON.parse(localStorage.getItem('user_votes')) || {};
+    let posts = JSON.parse(localStorage.getItem('campus_posts_prcet')) || defaultPosts;
+    let userVotes = JSON.parse(localStorage.getItem('user_votes_prcet')) || {}; 
     let currentCategory = 'all';
 
     function saveState() {
-      localStorage.setItem('campus_posts', JSON.stringify(posts));
-      localStorage.setItem('user_votes', JSON.stringify(userVotes));
+      localStorage.setItem('campus_posts_prcet', JSON.stringify(posts));
+      localStorage.setItem('user_votes_prcet', JSON.stringify(userVotes));
     }
 
     function renderPosts() {
@@ -129,30 +168,34 @@
         ? posts 
         : posts.filter(p => p.category === currentCategory);
 
-      // Sort by votes descending
+      // Sort by highest votes
       filtered.sort((a, b) => b.votes - a.votes);
 
       filtered.forEach(post => {
-        const hasVoted = userVotes[post.id] || false;
+        const userVoteStatus = userVotes[post.id]; // 'up', 'down', or undefined
+        
         const card = document.createElement('div');
-        card.className = "bg-slate-800/80 border border-slate-700/60 rounded-xl p-5 flex items-start gap-4 transition hover:border-slate-600";
+        card.className = "bg-slate-800/80 border border-slate-700/60 rounded-xl p-4 sm:p-5 flex items-start gap-3 sm:gap-4 transition hover:border-slate-600";
         card.innerHTML = `
-          <!-- Upvote Column -->
-          <div class="flex flex-col items-center">
-            <button onclick="handleVote(${post.id})" class="p-2 rounded-lg transition ${hasVoted ? 'bg-indigo-600 text-white' : 'bg-slate-900 text-slate-400 hover:text-white'}">
-              <i data-lucide="arrow-big-up" class="w-5 h-5"></i>
+          <!-- Reddit-style Upvote/Downvote Column -->
+          <div class="flex flex-col items-center bg-slate-900/50 rounded-lg p-1">
+            <button onclick="handleVote(${post.id}, 'up')" class="p-1 rounded transition ${userVoteStatus === 'up' ? 'text-orange-500' : 'text-slate-500 hover:text-orange-400 hover:bg-slate-800'}">
+              <i data-lucide="arrow-big-up" class="w-5 h-5 sm:w-6 sm:h-6"></i>
             </button>
-            <span class="text-xs font-bold mt-1.5 ${hasVoted ? 'text-indigo-400' : 'text-slate-300'}">${post.votes}</span>
+            <span class="text-xs sm:text-sm font-bold py-0.5 ${userVoteStatus === 'up' ? 'text-orange-500' : userVoteStatus === 'down' ? 'text-indigo-400' : 'text-slate-300'}">${post.votes}</span>
+            <button onclick="handleVote(${post.id}, 'down')" class="p-1 rounded transition ${userVoteStatus === 'down' ? 'text-indigo-400' : 'text-slate-500 hover:text-indigo-400 hover:bg-slate-800'}">
+              <i data-lucide="arrow-big-down" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+            </button>
           </div>
 
           <!-- Content Column -->
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap items-center gap-2 mb-1.5">
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-700 text-slate-300 border border-slate-600">${post.category}</span>
-              <span class="text-xs font-medium px-2 py-0.5 rounded-full border ${post.statusColor}">${post.status}</span>
+          <div class="flex-1 min-w-0 pt-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-700 text-slate-300 border border-slate-600">${post.category}</span>
+              <span class="text-[10px] sm:text-xs font-medium px-2 py-0.5 rounded-full border ${post.statusColor}">${post.status}</span>
             </div>
-            <h2 class="text-base font-semibold text-white leading-snug mb-1">${post.title}</h2>
-            <p class="text-sm text-slate-400 leading-relaxed">${post.desc}</p>
+            <h2 class="text-sm sm:text-base font-semibold text-white leading-snug mb-1.5">${post.title}</h2>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">${post.desc}</p>
           </div>
         `;
         container.appendChild(card);
@@ -160,16 +203,25 @@
       lucide.createIcons();
     }
 
-    function handleVote(id) {
+    function handleVote(id, type) {
       const post = posts.find(p => p.id === id);
       if (!post) return;
 
-      if (userVotes[id]) {
-        post.votes -= 1;
+      const currentVote = userVotes[id];
+
+      // Logic for changing votes
+      if (currentVote === type) {
+        // If clicking the same button, remove the vote
+        post.votes += (type === 'up' ? -1 : 1);
         delete userVotes[id];
       } else {
-        post.votes += 1;
-        userVotes[id] = true;
+        // If switching vote from up to down (or down to up), change by 2 points
+        if (currentVote === 'up' && type === 'down') post.votes -= 2;
+        else if (currentVote === 'down' && type === 'up') post.votes += 2;
+        // If voting for the first time, change by 1 point
+        else post.votes += (type === 'up' ? 1 : -1);
+        
+        userVotes[id] = type;
       }
       saveState();
       renderPosts();
@@ -201,13 +253,13 @@
         title,
         desc,
         category,
-        votes: 1,
+        votes: 1, // Automatically give 1 upvote from the creator
         status: "Under Review",
         statusColor: "text-amber-400 bg-amber-900/30 border-amber-800"
       };
 
       posts.unshift(newPost);
-      userVotes[newPost.id] = true;
+      userVotes[newPost.id] = 'up';
       saveState();
       renderPosts();
       document.getElementById('issueForm').reset();
