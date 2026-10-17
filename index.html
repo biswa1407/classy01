@@ -6,14 +6,23 @@
   <title>CampusVoice - MU Network</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- 1. ANIME.JS CDN ADDED HERE -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+    .word, .letter { display: inline-block; }
+  </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+<body class="bg-slate-900 text-slate-100 min-h-screen">
 
   <!-- TOP NAVBAR -->
-  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+  <header id="mainNav" class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-2 cursor-pointer" onclick="switchView('landing')">
-        <div class="bg-indigo-600 p-2 rounded-lg text-white font-bold text-sm">MU</div>
+        <div class="bg-indigo-600 p-2 rounded-lg text-white font-bold text-sm shadow-lg shadow-indigo-600/30">MU</div>
         <span class="font-bold text-lg tracking-tight hidden sm:block">Mumbai University <span class="text-indigo-400">CampusVoice</span></span>
         <span class="font-bold text-lg tracking-tight sm:hidden">MU <span class="text-indigo-400">Voice</span></span>
       </div>
@@ -29,15 +38,28 @@
   <main class="max-w-6xl mx-auto px-4 py-8">
 
     <!-- ========================================== -->
-    <!-- VIEW 1: LANDING PAGE (Select Role)         -->
+    <!-- VIEW 1: LANDING PAGE (With Anime.js Hero)  -->
     <!-- ========================================== -->
-    <div id="view-landing" class="flex flex-col items-center justify-center min-h-[70vh]">
-      <h1 class="text-4xl font-bold text-center mb-4">Welcome to CampusVoice</h1>
-      <p class="text-slate-400 text-center mb-10 max-w-lg">The official anonymous issue resolution network for all colleges affiliated with Mumbai University.</p>
+    <div id="view-landing" class="flex flex-col items-center justify-center pt-6 pb-16">
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+      <!-- Animated Hero Text -->
+      <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-950 border border-indigo-800/60 text-indigo-300 text-xs font-medium mb-4 hero-badge">
+          <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+          PRCET & MU Affiliated Network
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-center mb-4 tracking-tight" id="heroHeading">
+          <span class="word">Welcome</span> <span class="word">to</span> <span class="word text-indigo-400">CampusVoice</span>
+        </h1>
+        <p class="text-slate-400 text-center max-w-lg mx-auto hero-sub">
+          The official anonymous issue resolution network for all colleges affiliated with Mumbai University.
+        </p>
+      </div>
+      
+      <!-- Role Selection Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl mb-20">
         <!-- Student Card -->
-        <div onclick="switchView('login-student')" class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center cursor-pointer hover:border-indigo-500 hover:bg-slate-800/80 transition group">
+        <div onclick="switchView('login-student')" class="role-card spring-card bg-slate-800/90 border border-slate-700 rounded-2xl p-8 text-center cursor-pointer hover:border-indigo-500 transition group">
           <div class="bg-indigo-900/50 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-600 transition">
             <i data-lucide="graduation-cap" class="w-8 h-8 text-indigo-400 group-hover:text-white"></i>
           </div>
@@ -46,7 +68,7 @@
         </div>
 
         <!-- Institute Card -->
-        <div onclick="switchView('login-institute')" class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-center cursor-pointer hover:border-emerald-500 hover:bg-slate-800/80 transition group">
+        <div onclick="switchView('login-institute')" class="role-card spring-card bg-slate-800/90 border border-slate-700 rounded-2xl p-8 text-center cursor-pointer hover:border-emerald-500 transition group">
           <div class="bg-emerald-900/50 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-emerald-600 transition">
             <i data-lucide="building" class="w-8 h-8 text-emerald-400 group-hover:text-white"></i>
           </div>
@@ -54,6 +76,51 @@
           <p class="text-sm text-slate-400">Track and resolve issues for your college. Student identities remain hidden.</p>
         </div>
       </div>
+
+      <!-- INTEGRATED SHOWCASE SECTION (From your snippet, styled for CampusVoice) -->
+      <section class="w-full border-t border-slate-800 pt-16 mt-4 text-center">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-300" id="smallTeam">
+          <span class="word">Small</span> <span class="word">action,</span>
+        </h2>
+        <div class="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400 tracking-tight mb-10" id="bigResults">
+          <span class="letter">b</span><span class="letter">i</span><span class="letter">g</span><span class="letter">&nbsp;</span><span class="letter">r</span><span class="letter">e</span><span class="letter">s</span><span class="letter">u</span><span class="letter">l</span><span class="letter">t</span><span class="letter">s</span>
+        </div>
+
+        <!-- Fanned Portrait / Campus Cards -->
+        <div class="flex justify-center items-center flex-wrap sm:flex-nowrap gap-2 sm:gap-0 my-10 py-4" id="cardsRow">
+          <div class="fan-card w-24 h-32 sm:w-28 sm:h-40 rounded-xl overflow-hidden border-2 border-slate-700 shadow-xl -mx-2 bg-slate-800" data-rot="-9" data-depth="12">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=600&fit=crop&q=80" class="w-full h-full object-cover" alt="Campus" />
+          </div>
+          <div class="fan-card w-24 h-32 sm:w-28 sm:h-40 rounded-xl overflow-hidden border-2 border-slate-700 shadow-xl -mx-2 bg-slate-800" data-rot="-4" data-depth="8">
+            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=600&fit=crop&q=80" class="w-full h-full object-cover" alt="Students" />
+          </div>
+          <div class="fan-card w-24 h-32 sm:w-28 sm:h-40 rounded-xl overflow-hidden border-2 border-indigo-500/60 shadow-xl -mx-2 bg-slate-800 z-10" data-rot="0" data-depth="15">
+            <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=400&h=600&fit=crop&q=80" class="w-full h-full object-cover" alt="Library" />
+          </div>
+          <div class="fan-card w-24 h-32 sm:w-28 sm:h-40 rounded-xl overflow-hidden border-2 border-slate-700 shadow-xl -mx-2 bg-slate-800" data-rot="4" data-depth="9">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=600&fit=crop&q=80" class="w-full h-full object-cover" alt="Lab" />
+          </div>
+          <div class="fan-card w-24 h-32 sm:w-28 sm:h-40 rounded-xl overflow-hidden border-2 border-slate-700 shadow-xl -mx-2 bg-slate-800" data-rot="9" data-depth="13">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=600&fit=crop&q=80" class="w-full h-full object-cover" alt="Team" />
+          </div>
+        </div>
+
+        <!-- Animated Live Stats Row -->
+        <div class="grid grid-cols-3 gap-4 max-w-xl mx-auto mt-12 bg-slate-800/50 border border-slate-800 rounded-2xl p-6">
+          <div>
+            <div class="text-3xl font-extrabold text-indigo-400"><span class="stat-num" data-count="142">0</span>+</div>
+            <div class="text-xs text-slate-400 uppercase mt-1">Issues Resolved</div>
+          </div>
+          <div>
+            <div class="text-3xl font-extrabold text-emerald-400"><span class="stat-num" data-count="100">0</span>%</div>
+            <div class="text-xs text-slate-400 uppercase mt-1">Anonymous ID</div>
+          </div>
+          <div>
+            <div class="text-3xl font-extrabold text-amber-400"><span class="stat-num" data-count="24">0</span>hr</div>
+            <div class="text-xs text-slate-400 uppercase mt-1">Avg Response</div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- ========================================== -->
@@ -74,7 +141,7 @@
             <label class="block text-xs font-medium text-slate-400 mb-1">MU University ID Number (PRN)</label>
             <input type="text" required placeholder="e.g. 202301640..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white" />
           </div>
-          <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 rounded-lg mt-4">Verify & Enter</button>
+          <button type="submit" class="spring-btn w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 rounded-lg mt-4">Verify & Enter</button>
           <button type="button" onclick="switchView('landing')" class="w-full text-slate-400 text-sm mt-2 hover:text-white">Back</button>
         </form>
       </div>
@@ -95,7 +162,7 @@
             <label class="block text-xs font-medium text-slate-400 mb-1">Admin Password</label>
             <input type="password" required value="hackathon" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white" />
           </div>
-          <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded-lg mt-4">Access Dashboard</button>
+          <button type="submit" class="spring-btn w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded-lg mt-4">Access Dashboard</button>
           <button type="button" onclick="switchView('landing')" class="w-full text-slate-400 text-sm mt-2 hover:text-white">Back</button>
         </form>
       </div>
@@ -107,7 +174,7 @@
     <div id="view-dashboard-student" class="hidden">
       <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold">Pravin Rohidas College - Pulse</h1>
-        <button onclick="toggleModal(true)" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-lg">
+        <button onclick="toggleModal(true)" class="spring-btn bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-lg">
           <i data-lucide="plus" class="w-4 h-4"></i> Raise Issue
         </button>
       </div>
@@ -154,7 +221,7 @@
 
   <!-- Create Issue Modal (Student Only) -->
   <div id="createModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden px-4">
-    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 w-full max-w-md shadow-2xl">
+    <div id="modalBox" class="bg-slate-800 border border-slate-700 rounded-2xl p-6 w-full max-w-md shadow-2xl">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-bold text-white">Raise an Anonymous Issue</h3>
         <button onclick="toggleModal(false)" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
@@ -190,165 +257,39 @@
 
     let posts = JSON.parse(localStorage.getItem('mu_posts')) || defaultPosts;
     let userVotes = JSON.parse(localStorage.getItem('mu_user_votes')) || {}; 
-    let currentUserRole = null; // 'student' or 'institute'
+    let currentUserRole = null;
 
     function saveState() {
       localStorage.setItem('mu_posts', JSON.stringify(posts));
       localStorage.setItem('mu_user_votes', JSON.stringify(userVotes));
     }
 
-    // 2. View Management (SPA Logic)
+    // 2. View Management + ANIME.JS VIEW TRANSITIONS
     function switchView(viewName) {
-      // Hide all views
       ['landing', 'login-student', 'login-institute', 'dashboard-student', 'dashboard-institute'].forEach(v => {
         document.getElementById('view-' + v).classList.add('hidden');
       });
-      // Show selected view
-      document.getElementById('view-' + viewName).classList.remove('hidden');
+
+      const activeView = document.getElementById('view-' + viewName);
+      activeView.classList.remove('hidden');
+
+      // Animate view entrance smoothly with Anime.js
+      anime({
+        targets: activeView,
+        opacity: [0, 1],
+        translateY: [24, 0],
+        duration: 600,
+        easing: 'easeOutExpo'
+      });
+
+      if (viewName === 'landing') {
+        playLandingAnimations();
+      }
       
-      // Handle Navbar actions
       const navActions = document.getElementById('navActions');
       const roleBadge = document.getElementById('navRoleBadge');
       
       if (viewName.includes('dashboard')) {
         navActions.classList.remove('hidden');
         roleBadge.innerText = currentUserRole === 'institute' ? 'Institute Admin' : 'Verified Student';
-        roleBadge.className = currentUserRole === 'institute' 
-          ? 'text-xs bg-emerald-900/30 text-emerald-400 px-2 py-1 rounded border border-emerald-800 mr-3'
-          : 'text-xs bg-indigo-900/30 text-indigo-400 px-2 py-1 rounded border border-indigo-800 mr-3';
-      } else {
-        navActions.classList.add('hidden');
-      }
-      lucide.createIcons();
-    }
-
-    function handleLogin(e, role) {
-      e.preventDefault();
-      currentUserRole = role;
-      
-      if (role === 'student') {
-        renderStudentDashboard();
-        switchView('dashboard-student');
-      } else if (role === 'institute') {
-        renderInstituteDashboard();
-        switchView('dashboard-institute');
-      }
-    }
-
-    function logout() {
-      currentUserRole = null;
-      switchView('landing');
-    }
-
-    // 3. Student Dashboard Logic
-    function renderStudentDashboard() {
-      const container = document.getElementById('studentPostsContainer');
-      container.innerHTML = '';
-      
-      let sortedPosts = [...posts].sort((a, b) => b.votes - a.votes);
-
-      sortedPosts.forEach(post => {
-        const voteStatus = userVotes[post.id]; 
-        
-        container.innerHTML += `
-          <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 flex items-start gap-4">
-            <div class="flex flex-col items-center bg-slate-900/50 rounded-lg p-1">
-              <button onclick="handleVote(${post.id}, 'up')" class="p-1 rounded ${voteStatus === 'up' ? 'text-orange-500' : 'text-slate-500'}">
-                <i data-lucide="arrow-big-up" class="w-6 h-6"></i>
-              </button>
-              <span class="text-sm font-bold py-0.5 ${voteStatus === 'up' ? 'text-orange-500' : voteStatus === 'down' ? 'text-indigo-400' : 'text-slate-300'}">${post.votes}</span>
-              <button onclick="handleVote(${post.id}, 'down')" class="p-1 rounded ${voteStatus === 'down' ? 'text-indigo-400' : 'text-slate-500'}">
-                <i data-lucide="arrow-big-down" class="w-6 h-6"></i>
-              </button>
-            </div>
-            <div class="flex-1 pt-1">
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-700 text-slate-300">${post.category}</span>
-              <span class="text-xs font-medium ml-2 text-slate-400">Status: ${post.status}</span>
-              <h2 class="text-base font-semibold text-white mt-2">${post.title}</h2>
-            </div>
-          </div>
-        `;
-      });
-      lucide.createIcons();
-    }
-
-    function handleVote(id, type) {
-      if (currentUserRole !== 'student') return; // Only students can vote
-      
-      const post = posts.find(p => p.id === id);
-      const currentVote = userVotes[id];
-
-      if (currentVote === type) {
-        post.votes += (type === 'up' ? -1 : 1);
-        delete userVotes[id];
-      } else {
-        if (currentVote === 'up' && type === 'down') post.votes -= 2;
-        else if (currentVote === 'down' && type === 'up') post.votes += 2;
-        else post.votes += (type === 'up' ? 1 : -1);
-        userVotes[id] = type;
-      }
-      saveState();
-      renderStudentDashboard();
-    }
-
-    function toggleModal(open) {
-      document.getElementById('createModal').classList.toggle('hidden', !open);
-    }
-
-    function handleSubmit(e) {
-      e.preventDefault();
-      const title = document.getElementById('issueTitle').value;
-      const category = document.getElementById('issueCategory').value;
-
-      const newPost = { id: Date.now(), title, category, votes: 1, status: "Under Review" };
-      posts.unshift(newPost);
-      userVotes[newPost.id] = 'up';
-      saveState();
-      
-      renderStudentDashboard();
-      document.getElementById('issueForm').reset();
-      toggleModal(false);
-    }
-
-    // 4. Institute Dashboard Logic
-    function renderInstituteDashboard() {
-      const tbody = document.getElementById('instituteTableBody');
-      tbody.innerHTML = '';
-      document.getElementById('totalIssuesCount').innerText = posts.length;
-
-      let sortedPosts = [...posts].sort((a, b) => b.votes - a.votes);
-
-      sortedPosts.forEach(post => {
-        tbody.innerHTML += `
-          <tr class="hover:bg-slate-800/50 transition">
-            <td class="px-6 py-4 font-bold text-emerald-400">${post.votes}</td>
-            <td class="px-6 py-4">
-              <p class="font-medium text-white">${post.title}</p>
-              <p class="text-xs text-slate-500 mt-1">Reported by: ANONYMOUS STUDENT</p>
-            </td>
-            <td class="px-6 py-4"><span class="bg-slate-700 px-2 py-1 rounded text-xs">${post.category}</span></td>
-            <td class="px-6 py-4">
-              <select onchange="updateStatus(${post.id}, this.value)" class="bg-slate-900 border border-slate-600 rounded px-2 py-1 text-xs text-slate-300">
-                <option value="Under Review" ${post.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
-                <option value="Resolved" ${post.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
-              </select>
-            </td>
-          </tr>
-        `;
-      });
-    }
-
-    function updateStatus(id, newStatus) {
-      const post = posts.find(p => p.id === id);
-      if (post) {
-        post.status = newStatus;
-        saveState();
-      }
-    }
-
-    // Initialize UI
-    switchView('landing');
-    lucide.createIcons();
-  </script>
-</body>
-</html>
+        roleBadge.className = currentUserRole === 'institute'
